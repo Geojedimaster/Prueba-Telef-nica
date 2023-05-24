@@ -1,0 +1,40 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+dataframe = pd.read_excel('C:/Users/ECP/PycharmProjects/Distribucion/distribucion.xlsx', sheet_name='Hoja1')
+
+
+ingresos_empleados = dataframe['ingrl']
+
+
+media = np.mean(ingresos_empleados)
+moda = ingresos_empleados.mode().values[0]
+promedio = ingresos_empleados.sum() / len(ingresos_empleados)
+desviacion_estandar = np.std(ingresos_empleados)
+minimo = np.min(ingresos_empleados)
+maximo = np.max(ingresos_empleados)
+percentil_25 = np.percentile(ingresos_empleados, 25)
+percentil_50 = np.percentile(ingresos_empleados, 50)
+percentil_75 = np.percentile(ingresos_empleados, 75)
+
+
+plt.hist(ingresos_empleados, bins=10, density=True, alpha=0.7)
+plt.xlabel('Ingresos')
+plt.ylabel('Frecuencia')
+plt.title('Distribución de Ingresos de Empleados (2020)')
+plt.grid(True)
+plt.show()
+
+# Imprimir estadísticas descriptivas
+print("Estadísticas Descriptivas:")
+print("Media: {:.2f}".format(media))
+print("Moda: {:.2f}".format(moda))
+print("Promedio: {:.2f}".format(promedio))
+print("Desviación Estándar: {:.2f}".format(desviacion_estandar))
+print("Mínimo: {:.2f}".format(minimo))
+print("Máximo: {:.2f}".format(maximo))
+print("Percentil 25: {:.2f}".format(percentil_25))
+print("Percentil 50 (Mediana): {:.2f}".format(percentil_50))
+print("Percentil 75: {:.2f}".format(percentil_75))
