@@ -1,0 +1,33 @@
+import numpy as np
+import matplotlib.pyplot as plt
+import csv
+
+k = 3
+lambda_param = 2
+cantidad_numeros = 1000
+
+numeros_aleatorios = np.random.gamma(k, lambda_param, cantidad_numeros)
+
+plt.hist(numeros_aleatorios, bins=30, density=True, alpha=0.7)
+plt.xlabel('Valor')
+plt.ylabel('Frecuencia')
+plt.title('Distribución Gamma')
+plt.grid(True)
+
+media_calculada = np.mean(numeros_aleatorios)
+desviacion_estandar_calculada = np.std(numeros_aleatorios)
+
+plt.axvline(media_calculada, color='r', linestyle='--', linewidth=1, label=f'Media: {media_calculada:.2f}')
+plt.axvline(media_calculada + desviacion_estandar_calculada, color='g', linestyle='--', linewidth=1, label=f'Desviación Estándar: {desviacion_estandar_calculada:.2f}')
+plt.axvline(media_calculada - desviacion_estandar_calculada, color='g', linestyle='--', linewidth=1)
+
+plt.legend()
+
+with open('numeros_aleatorios.csv', 'w', newline='') as archivo_csv:
+    escritor_csv = csv.writer(archivo_csv)
+    escritor_csv.writerow(['Numeros Aleatorios'])
+    escritor_csv.writerows(zip(numeros_aleatorios))
+
+print("Se ha generado el archivo CSV 'numeros_aleatorios.csv' con los números aleatorios.")
+
+plt.show()
